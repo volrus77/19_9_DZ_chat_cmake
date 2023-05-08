@@ -1,4 +1,4 @@
-#include "chat.h"
+п»ї#include "chat.h"
 #include <filesystem>
 namespace fs = std::filesystem;
 #if defined(__linux__) 
@@ -19,12 +19,12 @@ void Chat::useSystenFunction() const
 {
 #if defined(__linux__) 
 
-	struct utsname utsname; // объект для структуры типа utsname
+	struct utsname utsname; // РѕР±СЉРµРєС‚ РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ С‚РёРїР° utsname
 
-	uname(&utsname); // передаем объект по ссылке
+	uname(&utsname); // РїРµСЂРµРґР°РµРј РѕР±СЉРµРєС‚ РїРѕ СЃСЃС‹Р»РєРµ
 
-	// распечатаем на экране информацию об операционной системе
-	// эту информацию нам вернуло ядро Linux в объекте utsname
+	// СЂР°СЃРїРµС‡Р°С‚Р°РµРј РЅР° СЌРєСЂР°РЅРµ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕРїРµСЂР°С†РёРѕРЅРЅРѕР№ СЃРёСЃС‚РµРјРµ
+	// СЌС‚Сѓ РёРЅС„РѕСЂРјР°С†РёСЋ РЅР°Рј РІРµСЂРЅСѓР»Рѕ СЏРґСЂРѕ Linux РІ РѕР±СЉРµРєС‚Рµ utsname
 	std::cout << "OS name: " << utsname.sysname << std::endl;
 	//std::cout << "Host name: " << utsname.nodename << std::endl; 
 	//std::cout << "OS release: " << utsname.release << std::endl; 
@@ -51,12 +51,12 @@ int Chat::startChat()
 
 	while (work_)
 	{
-		// вход в чат конкретного пользователя (currentUsesr != nullptr)
-		showLoginMenu();  // меню: вход, регистрация = вход, выход
+		// РІС…РѕРґ РІ С‡Р°С‚ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ (currentUsesr != nullptr)
+		showLoginMenu();  // РјРµРЅСЋ: РІС…РѕРґ, СЂРµРіРёСЃС‚СЂР°С†РёСЏ = РІС…РѕРґ, РІС‹С…РѕРґ
 
-		while (getcurrentUser())  // пока currentUsesr != nullptr
+		while (getcurrentUser())  // РїРѕРєР° currentUsesr != nullptr
 		{
-			// меню действий пользователя в чате
+			// РјРµРЅСЋ РґРµР№СЃС‚РІРёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ С‡Р°С‚Рµ
 			showUserMenu();
 		}
 	}
@@ -68,7 +68,7 @@ int Chat::startChat()
 void Chat::makeUsersArr()
 {
 	userArr_.reserve(MAXCOUNTUSERS);
-	// чтение пользователей из файла если существует
+	// С‡С‚РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РёР· С„Р°Р№Р»Р° РµСЃР»Рё СЃСѓС‰РµСЃС‚РІСѓРµС‚
 	std::fstream users_stream = std::fstream(users_file_, std::ios::in | std::ios::out);
 	if (!users_stream)
 	{
@@ -92,7 +92,7 @@ void Chat::makeUsersArr()
 void Chat::makeMessagesArr()
 {
 	messageArr_.reserve(MAXCOUNTUSERS);
-	// чтение сообщений из файла если существует
+	// С‡С‚РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёР№ РёР· С„Р°Р№Р»Р° РµСЃР»Рё СЃСѓС‰РµСЃС‚РІСѓРµС‚
 	std::fstream messages_stream = std::fstream(messages_file_, std::ios::in | std::ios::out);
 	if (!messages_stream)
 	{
@@ -113,7 +113,7 @@ void Chat::makeMessagesArr()
 
 void Chat::saveUsersArr() const
 {
-	// сохраняем пользователей в файл
+	// СЃРѕС…СЂР°РЅСЏРµРј РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РІ С„Р°Р№Р»
 	std::fstream users_stream = std::fstream(users_file_, std::ios::in | std::ios::out);
 	if (users_stream) {
 
@@ -128,7 +128,7 @@ void Chat::saveUsersArr() const
 			std::ios::trunc);
 		if (users_stream) {
 
-			// разрешения на файл только для владельца, при создании файла
+			// СЂР°Р·СЂРµС€РµРЅРёСЏ РЅР° С„Р°Р№Р» С‚РѕР»СЊРєРѕ РґР»СЏ РІР»Р°РґРµР»СЊС†Р°, РїСЂРё СЃРѕР·РґР°РЅРёРё С„Р°Р№Р»Р°
 			fs::permissions(users_file_, fs::perms::owner_all, fs::perm_options::replace);
 
 			for (const auto& user : userArr_)
@@ -142,7 +142,7 @@ void Chat::saveUsersArr() const
 
 void Chat::saveMessagesArr() const
 {
-	// сохраняем сообщения в файл
+	// СЃРѕС…СЂР°РЅСЏРµРј СЃРѕРѕР±С‰РµРЅРёСЏ РІ С„Р°Р№Р»
 	std::fstream messages_stream = std::fstream(messages_file_, std::ios::in | std::ios::out);
 	if (messages_stream) {
 
@@ -152,12 +152,12 @@ void Chat::saveMessagesArr() const
 		}
 	}
 	else {
-		// Для создания файла используем параметр ios::trunc
+		// Р”Р»СЏ СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»Р° РёСЃРїРѕР»СЊР·СѓРµРј РїР°СЂР°РјРµС‚СЂ ios::trunc
 		std::fstream messages_stream = std::fstream(messages_file_, std::ios::in | std::ios::out |
 			std::ios::trunc);
 		if (messages_stream) {
 
-			// разрешения на файл только для владельца, при создании файла
+			// СЂР°Р·СЂРµС€РµРЅРёСЏ РЅР° С„Р°Р№Р» С‚РѕР»СЊРєРѕ РґР»СЏ РІР»Р°РґРµР»СЊС†Р°, РїСЂРё СЃРѕР·РґР°РЅРёРё С„Р°Р№Р»Р°
 			fs::permissions(messages_file_, fs::perms::owner_all, fs::perm_options::replace);
 
 			for (const auto& msg : messageArr_)

@@ -1,4 +1,4 @@
-
+п»ї
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -18,8 +18,8 @@ public:
     const std::string& getReceiver() const { return receiver_; }
     const std::string& getText() const { return text_; }
 
-    friend std::fstream& operator >>(std::fstream& is, Message& obj);  // читаем из файла
-    friend std::ostream& operator <<(std::ostream& os, const Message& obj);  // пишем в файл
+    friend std::fstream& operator >>(std::fstream& is, Message& obj);  // С‡РёС‚Р°РµРј РёР· С„Р°Р№Р»Р°
+    friend std::ostream& operator <<(std::ostream& os, const Message& obj);  // РїРёС€РµРј РІ С„Р°Р№Р»
 
 private:
     std::string sender_;

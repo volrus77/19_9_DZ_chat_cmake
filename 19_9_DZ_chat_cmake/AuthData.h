@@ -1,4 +1,4 @@
-
+п»ї
 
 #include "sha1.h"
 #include <string>
@@ -30,14 +30,14 @@ public:
         if (pass_sha1_hash != 0)
             delete[] pass_sha1_hash;
     }*/
-    // копирует логин, забирает внутрь хеш
+    // РєРѕРїРёСЂСѓРµС‚ Р»РѕРіРёРЅ, Р·Р°Р±РёСЂР°РµС‚ РІРЅСѓС‚СЂСЊ С…РµС€
     AuthData(std::string login, uint* sh1, std::string name) {
         login_ = login;
         pass_sha1_hash_ = sh1;
         name_ = name;
         status_ = CellStatus::engaged;
     }
-    // копирует всё
+    // РєРѕРїРёСЂСѓРµС‚ РІСЃС‘
     AuthData& operator = (const AuthData& other) {
         login_ = other.login_;
 
@@ -53,8 +53,8 @@ public:
 
     const std::string& getLogin() const { return login_; }
     const uint* getPassHash() const { return pass_sha1_hash_; }
-    friend std::fstream& operator >>(std::fstream& is, AuthData& obj);  // читаем из файла
-    friend std::ostream& operator <<(std::ostream& os, const AuthData& obj);  // пишем в файл
+    friend std::fstream& operator >>(std::fstream& is, AuthData& obj);  // С‡РёС‚Р°РµРј РёР· С„Р°Р№Р»Р°
+    friend std::ostream& operator <<(std::ostream& os, const AuthData& obj);  // РїРёС€РµРј РІ С„Р°Р№Р»
 
 private:
     std::string login_;
